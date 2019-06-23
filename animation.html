@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <title>class</title>
+  <style>
+    html {
+      overflow: hidden;
+    }
+
+    canvas {
+      position: absolute;
+    }
+
+    body {
+      margin: 0;
+    }
+  </style>
+
+</head>
+
+<body>
+  <canvas></canvas>
+</body>
+<script>
+  var canvas = document.querySelector('canvas');
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  var c = canvas.getContext('2d');
+
+  var x = Math.random() * innerWidth;
+  var y = Math.random() * innerHeight;
+  var dx = (Math.random() - 0.5) * 8;
+  var dy = (Math.random() - 0.5) * 8;
+  var radius = 30;
+
+  function animate() {
+    requestAnimationFrame(animate);
+
+    c.beginPath();
+    c.clearRect(0, 0, innerWidth, innerHeight);   //если c.clearRect(0, 0, innerWidth, innerHeight); и circle.draw(); поместить после c.beginPath(); будет привязка линией :)
+    c.arc(x, y, radius, 0, Math.PI * 2, false);
+    c.strokeStyle = "blue";
+    c.stroke();
+
+    x += dx;
+    y += dy;
+
+    if (x + radius > innerWidth || x - radius < 0) {
+      dx = -dx;
+    }
+    if (y + radius > innerHeight || y - radius < 0) {
+      dy = -dy;
+    }
+  }
+
+  animate();
+</script>
+
+</html>
